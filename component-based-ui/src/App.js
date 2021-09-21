@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.scss';
 import Footer from './component/Footer';
 import Header from './component/Header';
 import FormComponent from './component/FormComponent';
@@ -10,32 +10,30 @@ import React, { useState } from 'react';
 function App() {
   
 
-  const [email, setEmail] = useState(
-    'Email !'
+  const [data, setData] = useState(
+    []
   );
-  const [userName, setUserName] = useState(
-    'User Name!'
-  );
+  
 
   const submitFun = (e) =>{
     e.preventDefault();
 
-    let email = e.target.email.value
-    let userName = e.target.userName.value
+    let myData = e.target.email.value
+    
 
 
-    setEmail(' Email => ' + email)
-    setUserName(' User Name => ' + userName)
+    setData(`get :  ${myData}`)
+    
 
   }
 
   return (
     <div className="App">
-      <Header />
+      <Header myHeader={'RESTy'} />
       <FormComponent submitFun={submitFun} />
-      <Result email={email} userName={userName}  />
+      <Result data={data} />
       
-      <Footer />
+      <Footer myFooter={'© 2018 Code Fellows'} />
     </div>
   );
 }

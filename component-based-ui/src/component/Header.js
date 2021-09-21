@@ -1,8 +1,10 @@
+import '../styles/Header.scss'
+
 function Header(props) {
     return (
-        <>
-            <h1> LAB - Component Based UI </h1>
-        </>
+        <div className="headers">
+            <h1> {props.myHeader} </h1>
+        </div>
     );
 }
 
