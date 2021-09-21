@@ -1,9 +1,11 @@
+import "../styles/Footer.scss"
+
 function Footer(props) {
     return (
-        <>
-            <h3> Footer </h3>
+        <div id="footer">
+            <p> {props.myFooter} </p>
 
-        </>
+        </div>
     );
 }
 
