@@ -9,90 +9,76 @@ import axios from 'axios';
 import Loading from './component/loading/loading';
 
 
-function App() {
 
-
-  const [data, setData] = useState(
-    {headers:'headers', data:"Results"}
-  );
-
-  const [method, setMethod] = useState(
-    'get'
-  );
-
-  const [loading, setLoading] = useState(
-    false
-  );
-
-  const submitFun = async (e) => {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: { headers: 'headers', data: "Results" },
+      method: 'get',
+      loading: false
+    }
+  }
+  submitFun = async (e) => {
     e.preventDefault();
-
     let myData = e.target.email.value
 
     let myButton = e.target.myButton.textContent
-
     // console.log(myButton)
     let resultData
-
-    setLoading(true)
-
-    try{
-      if(myButton === 'get'){
+    this.setState({ loading: true })
+    try {
+      if (myButton === 'get') {
         console.log('get')
         resultData = await axios.get(myData)
-      }else if(myButton === 'post'){
+      } else if (myButton === 'post') {
         console.log('post')
         resultData = await axios.post(myData)
-  
-      }else if(myButton === 'delete'){
+      } else if (myButton === 'delete') {
         console.log('delete')
         resultData = await axios.delete(myData)
-  
-      }else if(myButton === 'put'){
+      } else if (myButton === 'put') {
         console.log('put')
         resultData = await axios.put(myData)
-  
       }
-  
-      setMethod(myButton)
-      setLoading(false)
       let lastResult = resultData
-      setData(lastResult)
-  
       console.log(resultData);
-  
-  
-    }catch(err){
-      setMethod(myButton)
-  
-      setLoading(false)
+      this.setState({
+        method: myButton,
+        loading: false,
+        data: lastResult
+      })
+    } catch (err) {
       let newObj = {
         headers: `Faild to ${myButton} this link ${myData}`,
         data: err
       }
       let lastResult = newObj
-      setData(lastResult)
-  
+      this.setState({
+        method: myButton,
+        loading: false,
+        data: lastResult
+      })
       console.log(err);
-  
     }
-    
   }
+  render() {
+    return (
+      <div className="App">
+        <Header myHeader={'RESTy'} />
+        <FormComponent submitFun={this.submitFun} />
 
-  return (
-    <div className="App">
-      <Header myHeader={'RESTy'} />
-      <FormComponent submitFun={submitFun} />
-      {
-        loading &&
-         <Loading />
-      }
-     
-      <Result method={method} data={data} />
+        {
+          this.state.loading &&
+          <Loading />
+        }
 
-      <Footer myFooter={'© 2018 Code Fellows'} />
-    </div>
-  );
+        <Result method={this.state.method} data={this.state.data} />
+        <Footer thefooter={'© 2018 Code Fellows'} />
+
+        <Footer myFooter={'© 2018 Code Fellows'} />
+      </div>
+    )
+  }
 }
-
-export default App;
+export default App
