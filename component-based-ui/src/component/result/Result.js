@@ -1,4 +1,5 @@
 import "./Result.scss"
+
 import JSONPretty from 'react-json-pretty';
 import Loading from '../loading/loading';
 
@@ -58,6 +59,7 @@ function Result(props) {
                 {JSON.stringify(props.data.data, null, 2)}
                 
             </pre>
+
         </div>
     );
 }

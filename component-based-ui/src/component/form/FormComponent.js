@@ -3,6 +3,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import './Form.scss'
+
 import React, { useState } from 'react';
 
 function FormComponent(props) {
@@ -33,6 +34,7 @@ function FormComponent(props) {
                     <Button onClick={()=>setMethod('put')} className="axiosBtn" variant="secondary"> Put </Button>
                 </ButtonGroup>
                 {/* <Button onClick={methodFun} > Test </Button> */}
+
 
 
             </Form>

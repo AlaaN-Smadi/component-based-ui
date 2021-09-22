@@ -4,6 +4,7 @@ import Footer from './component/footer/Footer';
 import Header from './component/header/Header';
 import FormComponent from './component/form/FormComponent';
 import Result from './component/result/Result';
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import Loading from './component/loading/loading';
@@ -82,3 +83,4 @@ class App extends React.Component {
   }
 }
 export default App
+
