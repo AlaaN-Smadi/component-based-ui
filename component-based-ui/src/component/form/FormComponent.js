@@ -2,7 +2,7 @@ import { Form, Button } from 'react-bootstrap'
 import FormControl from 'react-bootstrap/FormControl'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import '../styles/Form.scss'
+import './Form.scss'
 
 function FormComponent(props) {
     return (
