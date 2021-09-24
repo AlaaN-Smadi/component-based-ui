@@ -1,7 +1,7 @@
 import "./Result.scss"
 
-import JSONPretty from 'react-json-pretty';
-import Loading from '../loading/loading';
+// import JSONPretty from 'react-json-pretty';
+// import Loading from '../loading/loading';
 
 
 function Result(props) {
