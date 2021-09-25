@@ -62,6 +62,8 @@ function Result(props) {
                 
             </pre> */}
 
+<h1>Result : </h1>
+
             <pre>
                 <h3> Headers </h3>
                 {props.data ? <JSONPretty data={props.data.headers} /> : <Loading />}
