@@ -5,11 +5,13 @@ import Header from './component/header/Header';
 import FormComponent from './component/form/FormComponent';
 import Result from './component/result/Result';
 
-import { useEffect , useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import axios from 'axios';
 import Loading from './component/loading/loading';
 
+import History from './component/History/history';
 
+import { initialState, historyReducer, addAction } from './component/History/reducer';
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -115,17 +117,22 @@ function App() {
 
   const [requestInfo, setRequestInfo] = useState(
     {
-      method:'get',
-      url:'link',
-      reqBody:{}
+      method: 'get',
+      url: 'link',
+      reqBody: {}
     }
   );
 
-  const myAPIFun = (myAPI) =>{
+  const [state, dispatch] = useReducer(historyReducer, initialState);
+
+  const myAPIFun = (myAPI) => {
     setRequestInfo(myAPI)
   }
 
-  
+  const getOldResult = (myResult) =>{
+    setData(myResult)
+  }
+
   useEffect(() => {
     async function getApiData() {
       console.log(requestInfo)
@@ -156,6 +163,7 @@ function App() {
           setMethod(myButton)
           setloading(false)
           setData(lastResult)
+          dispatch(addAction({url: url, method:method,result:lastResult}));
         } catch (err) {
           let newObj = {
             headers: `Faild to ${myButton} this link ${formData}`,
@@ -165,11 +173,13 @@ function App() {
           setMethod(myButton)
           setloading(false)
           setData(lastResult)
+          dispatch(addAction({url: url, method:method,result:lastResult}));
           console.log(err);
         }
-        
+
       }
     }
+
     getApiData();
   }, [requestInfo])
 
@@ -183,8 +193,9 @@ function App() {
         <Loading />
       }
 
+      <br />
       <Result method={method} data={data} />
-
+      <History history={state.history} getOldResult={getOldResult} />
 
       <Footer myFooter={'© 2018 Code Fellows'} />
     </div>
