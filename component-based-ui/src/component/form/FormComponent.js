@@ -11,10 +11,16 @@ function FormComponent(props) {
         'get'
     );
 
+    const handelApi = (e) => {
+        e.preventDefault();
+        let url = e.target.email.value
+        let newobj= { method: method, url: url , reqBody: {} }
+        props.myAPIFun(newobj)
+    }
     
     return (
         <>
-            <Form onSubmit={props.submitFun}>
+            <Form onSubmit={handelApi}>
                 <Form.Group id="myLink" className="mb-3" >
                     <Form.Label> Url link : </Form.Label>
                     <Form.Control id="input_Link" name="email" type="text" placeholder="Enter Link" />
